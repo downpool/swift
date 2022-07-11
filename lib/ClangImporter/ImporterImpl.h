@@ -1861,6 +1861,12 @@ inline Optional<const clang::EnumDecl *> findAnonymousEnumForTypedef(
   return None;
 }
 
+inline bool requiresCPlusPlus(const clang::Module *module) {
+  return llvm::any_of(module->Requirements, [](clang::Module::Requirement req) {
+    return req.first == "cplusplus";
+  });
+}
+
 }
 }
 
